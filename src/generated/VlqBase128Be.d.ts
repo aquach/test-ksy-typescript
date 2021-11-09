@@ -1,5 +1,11 @@
 // This is a generated file! Please edit source .ksy file and use kaitai-struct-compiler to rebuild
 
+interface DebugPosition {
+  start: number;
+  end: number;
+  ioOffset: number;
+}
+
 
 /**
  * A variable-length unsigned integer using base128 encoding. 1-byte groups
@@ -19,7 +25,10 @@
  */
 declare class VlqBase128Be {
   constructor(io: any, parent?: any, root?: any);
+  _read(): void;
   __type: 'VlqBase128Be';
+  _io: any;
+
   last: number;
 
   /**
@@ -27,6 +36,10 @@ declare class VlqBase128Be {
    */
   value: number;
   groups: VlqBase128Be.Group[];
+
+  _debug: {
+    groups: DebugPosition;
+  };
 }
 
 
@@ -36,7 +49,10 @@ declare class VlqBase128Be {
 declare namespace VlqBase128Be {
   class Group {
     constructor(io: any, parent?: any, root?: any);
+    _read(): void;
     __type: 'Group';
+    _io: any;
+
 
     /**
      * If true, then we have more bytes to read
@@ -48,6 +64,10 @@ declare namespace VlqBase128Be {
      */
     value: number;
     b: number;
+
+    _debug: {
+      b: DebugPosition;
+    };
   }
 }
 

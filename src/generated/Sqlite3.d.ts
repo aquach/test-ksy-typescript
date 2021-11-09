@@ -1,17 +1,23 @@
 // This is a generated file! Please edit source .ksy file and use kaitai-struct-compiler to rebuild
 
+interface DebugPosition {
+  start: number;
+  end: number;
+  ioOffset: number;
+}
+
 import VlqBase128Be from './VlqBase128Be';
 /**
  * SQLite3 is a popular serverless SQL engine, implemented as a library
  * to be used within other applications. It keeps its databases as
  * regular disk files.
- *
+ * 
  * Every database file is segmented into pages. First page (starting at
  * the very beginning) is special: it contains a file-global header
  * which specifies some data relevant to proper parsing (i.e. format
  * versions, size of page, etc). After the header, normal contents of
  * the first page follow.
- *
+ * 
  * Each page would be of some type, and generally, they would be
  * reached via the links starting from the first page. First page type
  * (`root_page`) is always "btree_page".
@@ -19,7 +25,10 @@ import VlqBase128Be from './VlqBase128Be';
  */
 declare class Sqlite3 {
   constructor(io: any, parent?: any, root?: any);
+  _read(): void;
   __type: 'Sqlite3';
+  _io: any;
+
   lenPage: number;
   magic: Uint8Array;
 
@@ -107,23 +116,60 @@ declare class Sqlite3 {
   versionValidFor: number;
   sqliteVersionNumber: number;
   rootPage: Sqlite3.BtreePage;
+
+  _debug: {
+    magic: DebugPosition;
+    lenPageMod: DebugPosition;
+    writeVersion: DebugPosition & { enumName: string; };
+    readVersion: DebugPosition & { enumName: string; };
+    reservedSpace: DebugPosition;
+    maxPayloadFrac: DebugPosition;
+    minPayloadFrac: DebugPosition;
+    leafPayloadFrac: DebugPosition;
+    fileChangeCounter: DebugPosition;
+    numPages: DebugPosition;
+    firstFreelistTrunkPage: DebugPosition;
+    numFreelistPages: DebugPosition;
+    schemaCookie: DebugPosition;
+    schemaFormat: DebugPosition;
+    defPageCacheSize: DebugPosition;
+    largestRootPage: DebugPosition;
+    textEncoding: DebugPosition & { enumName: string; };
+    userVersion: DebugPosition;
+    isIncrementalVacuum: DebugPosition;
+    applicationId: DebugPosition;
+    reserved: DebugPosition;
+    versionValidFor: DebugPosition;
+    sqliteVersionNumber: DebugPosition;
+    rootPage: DebugPosition;
+  };
 }
 
 declare namespace Sqlite3 {
   class Serial {
     constructor(io: any, parent?: any, root?: any);
+    _read(): void;
     __type: 'Serial';
+    _io: any;
+
     isBlob: boolean;
     isString: boolean;
     lenContent: number;
     code: VlqBase128Be;
+
+    _debug: {
+      code: DebugPosition;
+    };
   }
 }
 
 declare namespace Sqlite3 {
   class BtreePage {
     constructor(io: any, parent?: any, root?: any);
+    _read(): void;
     __type: 'BtreePage';
+    _io: any;
+
     pageType: number;
     firstFreeblock: number;
     numCells: number;
@@ -131,6 +177,16 @@ declare namespace Sqlite3 {
     numFragFreeBytes: number;
     rightPtr: number;
     cells: Sqlite3.RefCell[];
+
+    _debug: {
+      pageType: DebugPosition;
+      firstFreeblock: DebugPosition;
+      numCells: DebugPosition;
+      ofsCells: DebugPosition;
+      numFragFreeBytes: DebugPosition;
+      rightPtr: DebugPosition;
+      cells: DebugPosition;
+    };
   }
 }
 
@@ -141,18 +197,34 @@ declare namespace Sqlite3 {
 declare namespace Sqlite3 {
   class CellIndexLeaf {
     constructor(io: any, parent?: any, root?: any);
+    _read(): void;
     __type: 'CellIndexLeaf';
+    _io: any;
+
     lenPayload: VlqBase128Be;
     payload: Sqlite3.CellPayload;
     _raw_payload: Uint8Array;
+
+    _debug: {
+      lenPayload: DebugPosition;
+      payload: DebugPosition;
+      _raw_payload: DebugPosition;
+    };
   }
 }
 
 declare namespace Sqlite3 {
   class Serials {
     constructor(io: any, parent?: any, root?: any);
+    _read(): void;
     __type: 'Serials';
+    _io: any;
+
     entries: VlqBase128Be[];
+
+    _debug: {
+      entries: DebugPosition;
+    };
   }
 }
 
@@ -163,11 +235,21 @@ declare namespace Sqlite3 {
 declare namespace Sqlite3 {
   class CellTableLeaf {
     constructor(io: any, parent?: any, root?: any);
+    _read(): void;
     __type: 'CellTableLeaf';
+    _io: any;
+
     lenPayload: VlqBase128Be;
     rowId: VlqBase128Be;
     payload: Sqlite3.CellPayload;
     _raw_payload: Uint8Array;
+
+    _debug: {
+      lenPayload: DebugPosition;
+      rowId: DebugPosition;
+      payload: DebugPosition;
+      _raw_payload: DebugPosition;
+    };
   }
 }
 
@@ -178,11 +260,21 @@ declare namespace Sqlite3 {
 declare namespace Sqlite3 {
   class CellPayload {
     constructor(io: any, parent?: any, root?: any);
+    _read(): void;
     __type: 'CellPayload';
+    _io: any;
+
     lenHeaderAndLen: VlqBase128Be;
     columnSerials: Sqlite3.Serials;
     columnContents: Sqlite3.ColumnContent[];
     _raw_columnSerials: Uint8Array;
+
+    _debug: {
+      lenHeaderAndLen: DebugPosition;
+      columnSerials: DebugPosition;
+      columnContents: DebugPosition;
+      _raw_columnSerials: DebugPosition;
+    };
   }
 }
 
@@ -193,9 +285,17 @@ declare namespace Sqlite3 {
 declare namespace Sqlite3 {
   class CellTableInterior {
     constructor(io: any, parent?: any, root?: any);
+    _read(): void;
     __type: 'CellTableInterior';
+    _io: any;
+
     leftChildPage: number;
     rowId: VlqBase128Be;
+
+    _debug: {
+      leftChildPage: DebugPosition;
+      rowId: DebugPosition;
+    };
   }
 }
 
@@ -206,33 +306,61 @@ declare namespace Sqlite3 {
 declare namespace Sqlite3 {
   class CellIndexInterior {
     constructor(io: any, parent?: any, root?: any);
+    _read(): void;
     __type: 'CellIndexInterior';
+    _io: any;
+
     leftChildPage: number;
     lenPayload: VlqBase128Be;
     payload: Sqlite3.CellPayload;
     _raw_payload: Uint8Array;
+
+    _debug: {
+      leftChildPage: DebugPosition;
+      lenPayload: DebugPosition;
+      payload: DebugPosition;
+      _raw_payload: DebugPosition;
+    };
   }
 }
 
 declare namespace Sqlite3 {
   class ColumnContent {
     constructor(io: any, parent?: any, root?: any);
+    _read(): void;
     __type: 'ColumnContent';
+    _io: any;
+
     serialType: Sqlite3.Serial;
     asInt: number | number | number | number | number | number | undefined;
     asFloat: number;
     asBlob: Uint8Array;
     asStr: string;
     ser: any;
+
+    _debug: {
+      asInt: DebugPosition;
+      asFloat: DebugPosition;
+      asBlob: DebugPosition;
+      asStr: DebugPosition;
+      ser: DebugPosition;
+    };
   }
 }
 
 declare namespace Sqlite3 {
   class RefCell {
     constructor(io: any, parent?: any, root?: any);
+    _read(): void;
     __type: 'RefCell';
+    _io: any;
+
     body: Sqlite3.CellTableLeaf | Sqlite3.CellTableInterior | Sqlite3.CellIndexLeaf | Sqlite3.CellIndexInterior | undefined;
     ofsBody: number;
+
+    _debug: {
+      ofsBody: DebugPosition;
+    };
   }
 }
 

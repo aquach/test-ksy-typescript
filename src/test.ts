@@ -4,7 +4,9 @@ import KaitaiStream from "kaitai-struct/KaitaiStream";
 
 const contents = fs.readFileSync("test.db");
 const parsedSqlite3 = new Sqlite3(new KaitaiStream(contents));
+parsedSqlite3._read();
 
+console.log(parsedSqlite3._debug.numPages);
 console.log(parsedSqlite3.__type);
 console.log(typeof parsedSqlite3.__type);
 console.log(parsedSqlite3.magic);
